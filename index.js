@@ -9,6 +9,16 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 
+app.get("/api/fetching", function(req, res) {
+  var xml = req.query.xml;
+  
+  api.queryDian(`${xml}`,"responseXML")
+  .then(xmlResult => 
+    res.render('resultado',{data:xmlResult}));
+
+  res.render("index");
+});
+
 app.get('/results', function(req, res){
     var convert = req.query.convert;
 
@@ -18,6 +28,6 @@ app.get('/results', function(req, res){
 });
 
 
-app.listen(process.env.PORT || 8080, process.env.IP, function() {
-  console.log("Server is listening on http://localhost:8080");
+app.listen(process.env.PORT || 3028, process.env.IP, function() {
+  console.log("Server is listening on http://localhost:3028");
 });
